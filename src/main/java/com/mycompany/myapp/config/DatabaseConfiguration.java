@@ -6,7 +6,9 @@ import com.fasterxml.jackson.datatype.hibernate4.Hibernate4Module;
 import liquibase.integration.spring.SpringLiquibase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -46,6 +48,12 @@ public class DatabaseConfiguration {
             log.debug("Configuring Liquibase");
         }
         return liquibase;
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "spring.datasource.online")
+    public DataSource onlineDataSource() {
+        return DataSourceBuilder.create().build();
     }
 
     @Bean

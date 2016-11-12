@@ -1,0 +1,23 @@
+{
+    "jhmdsApp": {
+        "fund" : {
+            "home": {
+                "title": "Funds",
+                "createLabel": "Créer un nouveau Fund",
+                "createOrEditLabel": "Créer ou éditer un Fund",
+                "search": "Recherche pour Fund"
+            },
+            "created": "Un nouveau Fund a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Fund avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Fund avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Fund {{ id }} ?"
+            },
+            "detail": {
+                "title": "Fund"
+            },
+            "name": "Name",
+            "currency": "Currency"
+        }
+    }
+}
