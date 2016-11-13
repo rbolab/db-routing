@@ -5,9 +5,9 @@
         .module('jhmdsApp')
         .factory('JhiLanguageService', JhiLanguageService);
 
-    JhiLanguageService.$inject = ['$q', '$http', '$translate', 'LANGUAGES'];
+    JhiLanguageService.$inject = ['$q', '$translate', 'LANGUAGES'];
 
-    function JhiLanguageService ($q, $http, $translate, LANGUAGES) {
+    function JhiLanguageService ($q, $translate, LANGUAGES) {
         var service = {
             getAll: getAll,
             getCurrent: getCurrent

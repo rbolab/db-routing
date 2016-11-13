@@ -3,7 +3,9 @@ package com.mycompany.myapp.web.rest;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.Fund;
 
+import com.mycompany.myapp.domain.Order;
 import com.mycompany.myapp.repository.FundRepository;
+import com.mycompany.myapp.repository.OrderRepository;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,9 +28,12 @@ import java.util.Optional;
 public class FundResource {
 
     private final Logger log = LoggerFactory.getLogger(FundResource.class);
-        
+
     @Inject
     private FundRepository fundRepository;
+
+    @Inject
+    private OrderRepository orderRepository;
 
     /**
      * POST  /funds : Create a new fund.
@@ -81,6 +86,7 @@ public class FundResource {
     @Timed
     public List<Fund> getAllFunds() {
         log.debug("REST request to get all Funds");
+        List<Order> orders = orderRepository.findAll();
         List<Fund> funds = fundRepository.findAll();
         return funds;
     }
