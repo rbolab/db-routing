@@ -1,20 +1,18 @@
 package com.mycompany.myapp.repository;
 
 import com.mycompany.myapp.domain.Order;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import javax.inject.Inject;
 import java.util.List;
 
 @Repository
-public class OrderRepository {
+@CacheConfig(cacheNames = "amethystCache", keyGenerator = "amethystKeyGenerator")
+public class OrderRepository extends AmethystRespository {
 
-    @Inject
-    private JdbcTemplate jdbcTemplate;
-
+    @Cacheable
     public List<Order> findAll(){
         List<Order> orders = jdbcTemplate.query("select id, date from orders", new BeanPropertyRowMapper(Order.class));
         return orders;

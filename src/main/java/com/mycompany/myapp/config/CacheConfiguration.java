@@ -7,11 +7,13 @@ import com.hazelcast.instance.HazelcastInstanceFactory;
 import com.hazelcast.config.MapConfig;
 import com.hazelcast.config.EvictionPolicy;
 import com.hazelcast.config.MaxSizeConfig;
+import com.mycompany.myapp.config.hazelcast.AmethystKeyGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
@@ -47,6 +49,11 @@ public class CacheConfiguration {
     }
 
     @Bean
+    public KeyGenerator amethystKeyGenerator() {
+        return new AmethystKeyGenerator();
+    }
+
+    @Bean
     public HazelcastInstance hazelcastInstance(JHipsterProperties jHipsterProperties) {
         log.debug("Configuring Hazelcast");
         Config config = new Config();
@@ -62,8 +69,8 @@ public class CacheConfiguration {
             config.getNetworkConfig().getJoin().getMulticastConfig().setEnabled(false);
             config.getNetworkConfig().getJoin().getTcpIpConfig().setEnabled(false);
         }
-        config.getMapConfigs().put("default", initializeDefaultMapConfig());
-        config.getMapConfigs().put("com.mycompany.myapp.domain.*", initializeDomainMapConfig(jHipsterProperties));
+        //config.getMapConfigs().put("default", initializeDefaultMapConfig());
+        config.getMapConfigs().put("amethystCache", initializeDomainMapConfig(jHipsterProperties));
 
         hazelcastInstance = HazelcastInstanceFactory.newHazelcastInstance(config);
 
