@@ -1,11 +1,7 @@
 package com.mycompany.myapp.aop.context;
 
-import com.mycompany.myapp.config.Constants;
-import com.mycompany.myapp.config.ContextualDataSource;
 import com.mycompany.myapp.config.context.DataSourceContext;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
@@ -51,7 +47,7 @@ public class ContextAspect {
         }
     }
 
-    @Around("orderPointcut()")
+    /*@Around("orderPointcut()")
     public Object orderAround(ProceedingJoinPoint joinPoint) throws Throwable {
         String currentContext = (String)DataSourceContext.getCurrentContext();
         DataSourceContext.setCurrentContext("draft");
@@ -65,7 +61,7 @@ public class ContextAspect {
 
             throw e;
         }
-    }
+    }*/
 
 
 }
